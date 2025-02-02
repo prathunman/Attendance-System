@@ -65,7 +65,27 @@ loginForm.addEventListener("submit", async (e) => {
   const password = loginForm.querySelector(".passwordInput").value;
 
   if (validateEmail(email) === true && password.length > 7) {
-    console.log("Calling login API");
+    try {
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.text();
+
+      if (response.ok) {
+        // Store JWT Token in Local Storage
+        sessionStorage.setItem("jwtToken", data);
+        window.location.href = "home.html"; 
+      } else {
+        alert(`Login failed: ${data.message}`);
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again later.");
+    }
   } else {
     alert("Invalid email or password. Please try again.");
   }
@@ -80,9 +100,27 @@ signupForm.addEventListener("submit", async (e) => {
   const password = signupForm.querySelector(".passwordInput").value;
 
   if(validateEmail(email) === true) {
-    console.log("Calling signup API");
+    try {
+      const response = await fetch(`${API_BASE_URL}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+  
+      const data = await response.text();
+  
+      if (response.ok) {
+        alert("Signup successful! Please log in.");
+        forms.classList.remove("show-signup"); 
+      } else {
+        alert(`Signup failed: ${data.message}`);
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+    }
   } else {
     alert("Invalid email. Please try again.");
   }
 });
-
