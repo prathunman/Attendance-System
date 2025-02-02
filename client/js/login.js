@@ -57,12 +57,16 @@ passwordInputs.forEach(passwordInput => {
   });
 });
 
+// API Endpoints
+const API_BASE_URL = "http://localhost:8080/api/v1/auth";
+
 // Function to handle login
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const email = loginForm.querySelector(".emailInput").value;
   const password = loginForm.querySelector(".passwordInput").value;
+  
 
   if (validateEmail(email) === true && password.length > 7) {
     try {
