@@ -124,3 +124,10 @@ signupForm.addEventListener("submit", async (e) => {
     alert("Invalid email. Please try again.");
   }
 });
+
+// Check if the user is already logged in
+document.addEventListener("DOMContentLoaded", () => {
+  if (sessionStorage.getItem("jwtToken")) {
+    window.location.href = "home.html";
+  }
+});
