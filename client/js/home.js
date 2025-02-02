@@ -27,5 +27,5 @@ document.getElementById('logout').addEventListener('click', function(event) {
   
 function logout() {
     sessionStorage.removeItem('jwtToken'); 
-    window.location.href = '/login.html'; 
+    window.location.href = 'login.html'; 
 }
