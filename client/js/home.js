@@ -1,3 +1,7 @@
+if (sessionStorage.getItem("jwtToken") === null) {
+    window.location.href = "login.html";
+}
+
 document.getElementById('profileImage').addEventListener('click', function() {
     let dropdown = document.getElementById('dropdownMenu');
     if (dropdown.style.display === 'block') {
